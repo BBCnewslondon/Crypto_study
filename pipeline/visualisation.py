@@ -695,6 +695,138 @@ def generate_all_figures(
     print(f"  [+] {fig_path.name}")
 
     return figures
+# ---------------------------------------------------------------------------
+# 7.  Robustness Data Gaps plots
+# ---------------------------------------------------------------------------
+def plot_robustness_comparison(
+    system_label: str,
+    results: Dict[str, Any],
+    output_dir: Path,
+) -> Path:
+    """Plot the degradation of CCF metrics under random data gaps."""
+    _apply_style()
+    
+    fractions = []
+    opt_lags = []
+    corrs = []
+    
+    if results.get("baseline"):
+        bl_lags = [ep.optimal_lag for ep in results["baseline"]]
+        bl_corrs = [ep.peak_correlation for ep in results["baseline"]]
+        bl_corr_mean = np.mean(bl_corrs)
+        import statistics
+        bl_lag_mode = statistics.mode(bl_lags) if bl_lags else 0
+        fractions.append(0.0)
+        opt_lags.append(bl_lag_mode)
+        corrs.append(bl_corr_mean)
+        
+    random_res = results.get("random", {})
+    for frac_str in sorted(random_res.keys(), key=float):
+        frac = float(frac_str)
+        eps = random_res[frac_str]
+        if eps:
+            c_vals = [ep.peak_correlation for ep in eps]
+            l_vals = [ep.optimal_lag for ep in eps]
+            import statistics
+            l_mode = statistics.mode(l_vals) if l_vals else 0
+            
+            fractions.append(frac)
+            opt_lags.append(l_mode)
+            corrs.append(np.mean(c_vals))
+            
+    fig, ax1 = plt.subplots(figsize=(6, 4.5))
+    
+    color = PALETTE["primary"]
+    ax1.set_xlabel("Missing Data Fraction")
+    ax1.set_ylabel("Peak Cross-Correlation $\\rho$", color=color)
+    ax1.plot(fractions, corrs, marker="o", linestyle="-", color=color, linewidth=2)
+    ax1.tick_params(axis='y', labelcolor=color)
+    if corrs:
+        ax1.set_ylim(0, max(corrs) * 1.1)
+    
+    ax2 = ax1.twinx()  
+    color2 = PALETTE["secondary"]
+    ax2.set_ylabel("Optimal Lag $\\tau^*$ (minutes)", color=color2)  
+    ax2.plot(fractions, opt_lags, marker="s", linestyle="--", color=color2, linewidth=2)
+    ax2.tick_params(axis='y', labelcolor=color2)
+    
+    ax2.spines['right'].set_visible(True)
+    ax2.spines['right'].set_color("#333333")
+    
+    plt.title(f"Random Drop-out Robustness: {system_label}", fontweight="bold", fontsize=12)
+    fig.tight_layout()
+    
+    out = output_dir / f"robustness_random_{system_label.replace(' -> ', '_').replace(' ', '')}.png"
+    fig.savefig(out, facecolor="white")
+    plt.close(fig)
+    return out
+
+def plot_robustness_periodic(
+    system_label: str,
+    results: Dict[str, Any],
+    output_dir: Path,
+) -> Path:
+    """Plot the degradation of CCF metrics under periodic data gaps."""
+    _apply_style()
+    
+    periodic_res = results.get("periodic", {})
+    if not periodic_res:
+         return output_dir / f"robustness_periodic_{system_label.replace(' -> ', '_').replace(' ', '')}.png"
+         
+    labels = []
+    opt_lags = []
+    corrs = []
+    
+    if results.get("baseline"):
+        bl_lags = [ep.optimal_lag for ep in results["baseline"]]
+        bl_corrs = [ep.peak_correlation for ep in results["baseline"]]
+        import statistics
+        bl_lag_mode = statistics.mode(bl_lags) if bl_lags else 0
+        labels.append("Baseline (0m)")
+        opt_lags.append(bl_lag_mode)
+        corrs.append(np.mean(bl_corrs))
+
+    for key, eps in periodic_res.items():
+        if eps:
+            c_vals = [ep.peak_correlation for ep in eps]
+            l_vals = [ep.optimal_lag for ep in eps]
+            import statistics
+            l_mode = statistics.mode(l_vals) if l_vals else 0
+            
+            labels.append(key)
+            corrs.append(np.mean(c_vals))
+            opt_lags.append(l_mode)
+            
+    x = np.arange(len(labels))
+    width = 0.35
+
+    fig, ax1 = plt.subplots(figsize=(8, 4.5))
+
+    color = PALETTE["primary"]
+    rects1 = ax1.bar(x - width/2, corrs, width, label='Peak Correlation $\\rho$', color=color, alpha=0.8)
+    ax1.set_ylabel("Peak Cross-Correlation $\\rho$", color=color)
+    ax1.tick_params(axis='y', labelcolor=color)
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(labels, rotation=45, ha="right")
+
+    ax2 = ax1.twinx()  
+    color2 = PALETTE["secondary"]
+    rects2 = ax2.bar(x + width/2, opt_lags, width, label='Optimal Lag $\\tau^*$', color=color2, alpha=0.8)
+    ax2.set_ylabel("Optimal Lag $\\tau^*$ (minutes)", color=color2)  
+    ax2.tick_params(axis='y', labelcolor=color2)
+    ax2.spines['right'].set_visible(True)
+    ax2.spines['right'].set_color("#333333")
+    
+    for i, v in enumerate(opt_lags):
+         ax2.text(i + width/2, v + 0.5, str(v), color='#333333', ha='center', va='bottom', fontsize=9, fontweight='bold')
+
+    plt.title(f"Periodic Outage Robustness: {system_label}\nPeriod_Gap (mins)", fontweight="bold", fontsize=12)
+    fig.tight_layout()
+
+    out = output_dir / f"robustness_periodic_{system_label.replace(' -> ', '_').replace(' ', '')}.png"
+    fig.savefig(out, facecolor="white")
+    plt.close(fig)
+    return out
 
 
 if __name__ == "__main__":
