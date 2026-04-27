@@ -16,6 +16,18 @@ Four-panel overview of all gravitational systems: peak cross-correlation, Grange
 
 ---
 
+### Normalized Time Series Plots
+
+Standard time series of the assets over the course of the dataset, normalized to their initial starting price.
+
+` ```carousel
+![Major Cryptos Normalized](file:///c:/Users/singh/Crypto_study/pipeline_results/figures/major_cryptos_normalized.png)
+<!-- slide -->
+![Minor Cryptos Normalized](file:///c:/Users/singh/Crypto_study/pipeline_results/figures/minor_cryptos_normalized.png)
+` ```
+
+---
+
 ### Cross-Correlation Heatmap
 
 Mean CCF across all systems vs. lag, with optimal lags marked. The dominant signal at lag 0 (contemporaneous correlation) is visible for all systems, with the much weaker but structurally meaningful signal at positive lags (major leads minor).
