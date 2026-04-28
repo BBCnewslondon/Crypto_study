@@ -132,11 +132,24 @@ When injecting block-outages (e.g., 5 min every 1 hour, or 1 hour every 24 hours
 
 ---
 
+## Ecosystem Network Graph Analysis
+
+To treat the market as a complex system rather than isolated pairs, we computed pairwise Granger Causality across the entire defined asset list (BTC, ETH, SOL, ADA, DOGE, STX, ARB, JUP, SHIB). The resulting network graph visualizations map the flow of predictive capital. 
+
+Nodes are sized by their *out-degree* (total predictive influence exerted on the rest of the market). Edges represent a statistically significant predictive lead (Granger F-test at Lag 1 with $p < 0.05$), with the edge weight and color scaling to the F-statistic strength.
+
+![Ecosystem Network Q1](file:///c:/Users/singh/Crypto_study/pipeline_results/figures/ecosystem_network_Q1.png)
+
+
+---
+
 ## Files
 
 | File | Purpose |
 |------|---------|
 | [pipeline/robustness.py](file:///c:/Users/singh/Crypto_study/pipeline/robustness.py) | Tests CCF calculations against data degradation |
 | [pipeline/run_robustness.py](file:///c:/Users/singh/Crypto_study/pipeline/run_robustness.py) | Standalone script to execute gap analysis |
+| [pipeline/network_analysis.py](file:///c:/Users/singh/Crypto_study/pipeline/network_analysis.py) | Computes and plots the ecosystem-wide Granger causality network |
+| [pipeline/run_network_analysis.py](file:///c:/Users/singh/Crypto_study/pipeline/run_network_analysis.py) | Standalone script to execute the network graph analysis |
 | [visualisation.py](file:///c:/Users/singh/Crypto_study/pipeline/visualisation.py) | Visualisation module (14+ figure types) |
 | [figures/](file:///c:/Users/singh/Crypto_study/pipeline_results/figures) | Output directory for all PNG figures |
