@@ -4,11 +4,12 @@
     "minor": "STX",
     "major_pair": "XBTUSD",
     "minor_pair": "STXUSD",
-    "timestamp": "2026-04-23T12:37:14.094709+00:00",
+    "timestamp": "2026-04-28T16:26:37.706787+00:00",
     "ccf": [
       {
         "epoch_start": 1735689840,
         "epoch_end": 1738281840,
+        "n_obs": 4830,
         "optimal_lag": 1,
         "peak_correlation": 0.07610647005455261,
         "lags": [
@@ -261,6 +262,7 @@
       {
         "epoch_start": 1738281840,
         "epoch_end": 1740873840,
+        "n_obs": 3018,
         "optimal_lag": 1,
         "peak_correlation": 0.09541035561439618,
         "lags": [
@@ -619,11 +621,12 @@
     "minor": "ARB",
     "major_pair": "ETHUSD",
     "minor_pair": "ARBUSD",
-    "timestamp": "2026-04-23T12:37:16.256139+00:00",
+    "timestamp": "2026-04-28T16:26:40.080279+00:00",
     "ccf": [
       {
         "epoch_start": 1735689840,
         "epoch_end": 1738281840,
+        "n_obs": 4681,
         "optimal_lag": 53,
         "peak_correlation": 0.04116440362068384,
         "lags": [
@@ -876,6 +879,7 @@
       {
         "epoch_start": 1738281840,
         "epoch_end": 1740873840,
+        "n_obs": 2660,
         "optimal_lag": 12,
         "peak_correlation": 0.1457651970981217,
         "lags": [
@@ -1234,11 +1238,12 @@
     "minor": "JUP",
     "major_pair": "SOLUSD",
     "minor_pair": "JUPUSD",
-    "timestamp": "2026-04-23T12:37:17.549312+00:00",
+    "timestamp": "2026-04-28T16:26:41.351587+00:00",
     "ccf": [
       {
         "epoch_start": 1735689720,
         "epoch_end": 1738281720,
+        "n_obs": 10203,
         "optimal_lag": 1,
         "peak_correlation": 0.07955669245536964,
         "lags": [
@@ -1491,6 +1496,7 @@
       {
         "epoch_start": 1738281720,
         "epoch_end": 1740873720,
+        "n_obs": 7614,
         "optimal_lag": 1,
         "peak_correlation": 0.13189290502155712,
         "lags": [
@@ -1849,7 +1855,7 @@
     "minor": "SNEK",
     "major_pair": "ADAUSD",
     "minor_pair": "SNEKUSD",
-    "timestamp": "2026-04-23T12:37:19.484501+00:00",
+    "timestamp": "2026-04-28T16:26:43.361083+00:00",
     "error": "Candle file not found: c:\\Users\\singh\\Crypto_study\\Q1_Candlestick\\SNEKUSD_1.csv"
   },
   "DOGE__SHIB": {
@@ -1857,11 +1863,12 @@
     "minor": "SHIB",
     "major_pair": "XDGUSD",
     "minor_pair": "SHIBUSD",
-    "timestamp": "2026-04-23T12:37:19.505317+00:00",
+    "timestamp": "2026-04-28T16:26:43.395472+00:00",
     "ccf": [
       {
         "epoch_start": 1735690500,
         "epoch_end": 1738282500,
+        "n_obs": 13864,
         "optimal_lag": 1,
         "peak_correlation": 0.07959473063686535,
         "lags": [
@@ -2114,6 +2121,7 @@
       {
         "epoch_start": 1738282500,
         "epoch_end": 1740874500,
+        "n_obs": 8667,
         "optimal_lag": 1,
         "peak_correlation": 0.09913746687716493,
         "lags": [

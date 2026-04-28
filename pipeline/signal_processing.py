@@ -31,6 +31,7 @@ class CCFResult:
 
     epoch_start: int  # Unix timestamp
     epoch_end: int
+    n_obs: int        # number of observations
     optimal_lag: int  # minutes
     peak_correlation: float
     lags: NDArray[np.int64]
@@ -155,6 +156,7 @@ def rolling_ccf(
                 CCFResult(
                     epoch_start=int(start),
                     epoch_end=int(epoch_end),
+                    n_obs=len(x),
                     optimal_lag=int(opt_lag),
                     peak_correlation=float(peak_corr),
                     lags=lags,

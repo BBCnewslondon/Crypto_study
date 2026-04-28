@@ -141,7 +141,7 @@ def plot_ccf_correlogram(
         ax.axvline(0, color="#999999", linewidth=0.5, linestyle="--", alpha=0.5)
 
         # 95% confidence band (approx 2/sqrt(N))
-        n_obs = len(corrs)  # approximate
+        n_obs = epoch.get("n_obs", 43200)  # exact from signal_processing if available, else approx for 30-day epoch
         ci = 1.96 / np.sqrt(max(n_obs, 1))
         ax.axhspan(-ci, ci, color=PALETTE["light_fill"], alpha=0.35, zorder=0,
                     label="95% CI")
@@ -709,6 +709,8 @@ def plot_robustness_comparison(
     fractions = []
     opt_lags = []
     corrs = []
+    lags_std = []
+    corrs_std = []
     
     if results.get("baseline"):
         bl_lags = [ep.optimal_lag for ep in results["baseline"]]
@@ -719,6 +721,8 @@ def plot_robustness_comparison(
         fractions.append(0.0)
         opt_lags.append(bl_lag_mode)
         corrs.append(bl_corr_mean)
+        lags_std.append(np.std(bl_lags))
+        corrs_std.append(np.std(bl_corrs))
         
     random_res = results.get("random", {})
     for frac_str in sorted(random_res.keys(), key=float):
@@ -733,6 +737,8 @@ def plot_robustness_comparison(
             fractions.append(frac)
             opt_lags.append(l_mode)
             corrs.append(np.mean(c_vals))
+            lags_std.append(np.std(l_vals))
+            corrs_std.append(np.std(c_vals))
             
     fig, ax1 = plt.subplots(figsize=(6, 4.5))
     
@@ -740,14 +746,16 @@ def plot_robustness_comparison(
     ax1.set_xlabel("Missing Data Fraction")
     ax1.set_ylabel("Peak Cross-Correlation $\\rho$", color=color)
     ax1.plot(fractions, corrs, marker="o", linestyle="-", color=color, linewidth=2)
+    ax1.fill_between(fractions, np.array(corrs) - np.array(corrs_std), np.array(corrs) + np.array(corrs_std), color=color, alpha=0.2, label="$\pm 1 \sigma$ (Correlation)")
     ax1.tick_params(axis='y', labelcolor=color)
     if corrs:
-        ax1.set_ylim(0, max(corrs) * 1.1)
+        ax1.set_ylim(0, max(np.array(corrs) + np.array(corrs_std)) * 1.1)
     
     ax2 = ax1.twinx()  
     color2 = PALETTE["secondary"]
     ax2.set_ylabel("Optimal Lag $\\tau^*$ (minutes)", color=color2)  
     ax2.plot(fractions, opt_lags, marker="s", linestyle="--", color=color2, linewidth=2)
+    ax2.fill_between(fractions, np.array(opt_lags) - np.array(lags_std), np.array(opt_lags) + np.array(lags_std), color=color2, alpha=0.2, label="$\pm 1 \sigma$ (Lag)")
     ax2.tick_params(axis='y', labelcolor=color2)
     
     ax2.spines['right'].set_visible(True)
