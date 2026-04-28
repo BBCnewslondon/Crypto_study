@@ -114,14 +114,16 @@ def plot_ccf_correlogram(
     """
     _apply_style()
     n_epochs = len(ccf_data)
+    cols = min(n_epochs, 2)
+    rows = (n_epochs + cols - 1) // cols
     fig, axes = plt.subplots(
-        1, n_epochs, figsize=(5.5 * n_epochs, 4),
+        rows, cols, figsize=(5.5 * cols, 4 * rows),
         sharey=True, squeeze=False,
     )
-    axes = axes[0]
+    axes_flat = axes.flatten()
 
     for i, epoch in enumerate(ccf_data):
-        ax = axes[i]
+        ax = axes_flat[i]
         lags = np.array(epoch["lags"])
         corrs = np.array(epoch["correlations"])
         opt_lag = epoch["optimal_lag"]
@@ -165,10 +167,13 @@ def plot_ccf_correlogram(
         )
 
         ax.set_xlabel("Lag $\\tau$ (minutes)")
-        if i == 0:
+        if i % cols == 0:
             ax.set_ylabel("Cross-Correlation $\\hat{\\rho}(\\tau)$")
         ax.set_title(f"Epoch {i + 1}", fontweight="medium")
         ax.set_xlim(-65, 65)
+
+    for i in range(n_epochs, len(axes_flat)):
+        fig.delaxes(axes_flat[i])
 
     fig.suptitle(
         f"Cross-Correlation Function:  {system_label}",
