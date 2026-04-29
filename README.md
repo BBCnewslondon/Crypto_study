@@ -86,6 +86,7 @@ Mean absolute return at the predicted lag vs. round-trip exchange friction (57 b
 ## Robustness Analysis (Data Gaps)
 
 To answer the question of whether the measured correlation and lag are robust enough to survive the introduction of data gaps, a new robustness module was introduced. The module simulates:
+
 1. **Random data dropouts** (e.g. from network failures).
 2. **Periodic systematic outages** (e.g. routine exchange maintenance creating data voids).
 
@@ -111,12 +112,11 @@ When injecting block-outages (e.g., 5 min every 1 hour, or 1 hour every 24 hours
 
 ## Ecosystem Network Graph Analysis
 
-To treat the market as a complex system rather than isolated pairs, we computed pairwise Granger Causality across the entire defined asset list (BTC, ETH, SOL, ADA, DOGE, STX, ARB, JUP, SHIB). The resulting network graph visualizations map the flow of predictive capital. 
+To treat the market as a complex system rather than isolated pairs, we computed pairwise Granger Causality across the entire defined asset list (BTC, ETH, SOL, ADA, DOGE, STX, ARB, JUP, SHIB). The resulting network graph visualizations map the flow of predictive capital.
 
 Nodes are sized by their *out-degree* (total predictive influence exerted on the rest of the market). Edges represent a statistically significant predictive lead (Granger F-test at Lag 1 with $p < 0.05$), with the edge weight and color scaling to the F-statistic strength.
 
 ![Ecosystem Network Q1](pipeline_results/figures/ecosystem_network_Q1.png)
-
 
 ---
 
