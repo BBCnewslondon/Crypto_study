@@ -1,10 +1,5 @@
 {
-  "BTC__STX": {
-    "major": "BTC",
-    "minor": "STX",
-    "major_pair": "XBTUSD",
-    "minor_pair": "STXUSD",
-    "timestamp": "2026-05-05T22:01:54.691787+00:00",
+  "BTC_STX": {
     "ccf": [
       {
         "epoch_start": 1735689840,
@@ -575,8 +570,6 @@
         "is_significant": true
       }
     ],
-    "var_optimal_order": 9,
-    "var_aic": -24.41438894857771,
     "validation": {
       "major_asset": "BTC",
       "minor_asset": "STX",
@@ -585,7 +578,7 @@
       "in_sample_lag": 1,
       "in_sample_peak_corr": 0.085758,
       "oos_lag": 1,
-      "oos_peak_corr": 0.103843,
+      "oos_peak_corr": 0.100714,
       "lag_stable": true,
       "friction_checks": [
         {
@@ -616,12 +609,7 @@
       "fraction_profitable": 0.0
     }
   },
-  "ETH__ARB": {
-    "major": "ETH",
-    "minor": "ARB",
-    "major_pair": "ETHUSD",
-    "minor_pair": "ARBUSD",
-    "timestamp": "2026-05-05T22:01:55.811985+00:00",
+  "ETH_ARB": {
     "ccf": [
       {
         "epoch_start": 1735689840,
@@ -1192,8 +1180,6 @@
         "is_significant": false
       }
     ],
-    "var_optimal_order": 9,
-    "var_aic": -23.207795395239984,
     "validation": {
       "major_asset": "ETH",
       "minor_asset": "ARB",
@@ -1202,7 +1188,7 @@
       "in_sample_lag": 12,
       "in_sample_peak_corr": 0.093465,
       "oos_lag": 1,
-      "oos_peak_corr": 0.120622,
+      "oos_peak_corr": 0.119428,
       "lag_stable": false,
       "friction_checks": [
         {
@@ -1233,12 +1219,7 @@
       "fraction_profitable": 0.0
     }
   },
-  "SOL__JUP": {
-    "major": "SOL",
-    "minor": "JUP",
-    "major_pair": "SOLUSD",
-    "minor_pair": "JUPUSD",
-    "timestamp": "2026-05-05T22:01:56.667476+00:00",
+  "SOL_JUP": {
     "ccf": [
       {
         "epoch_start": 1735689720,
@@ -1809,8 +1790,6 @@
         "is_significant": true
       }
     ],
-    "var_optimal_order": 7,
-    "var_aic": -23.263167795497427,
     "validation": {
       "major_asset": "SOL",
       "minor_asset": "JUP",
@@ -1819,7 +1798,7 @@
       "in_sample_lag": 1,
       "in_sample_peak_corr": 0.105725,
       "oos_lag": 1,
-      "oos_peak_corr": 0.156278,
+      "oos_peak_corr": 0.153603,
       "lag_stable": true,
       "friction_checks": [
         {
@@ -1850,20 +1829,7 @@
       "fraction_profitable": 0.0
     }
   },
-  "ADA__SNEK": {
-    "major": "ADA",
-    "minor": "SNEK",
-    "major_pair": "ADAUSD",
-    "minor_pair": "SNEKUSD",
-    "timestamp": "2026-05-05T22:01:57.795424+00:00",
-    "error": "Candle file not found: c:\\Users\\singh\\Crypto_study\\Q1_Candlestick\\SNEKUSD_1.csv"
-  },
-  "DOGE__SHIB": {
-    "major": "DOGE",
-    "minor": "SHIB",
-    "major_pair": "XDGUSD",
-    "minor_pair": "SHIBUSD",
-    "timestamp": "2026-05-05T22:01:57.809295+00:00",
+  "DOGE_SHIB": {
     "ccf": [
       {
         "epoch_start": 1735690500,
@@ -2434,8 +2400,6 @@
         "is_significant": true
       }
     ],
-    "var_optimal_order": 7,
-    "var_aic": -24.856676396691682,
     "validation": {
       "major_asset": "DOGE",
       "minor_asset": "SHIB",
@@ -2444,7 +2408,7 @@
       "in_sample_lag": 1,
       "in_sample_peak_corr": 0.089366,
       "oos_lag": 1,
-      "oos_peak_corr": 0.121802,
+      "oos_peak_corr": 0.11821,
       "lag_stable": true,
       "friction_checks": [
         {
